@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.box{
+			height: 100px;
+			width: 100px;
+			background: red;
+			position: absolute;
+			border-radius: 100px;
+			transition: 1s;
+		}
+
+		.box2{
+			height: 100px;
+			width: 100px;
+			background: green;
+			position: absolute;
+			border-radius: 100px;
+			transition: 1s;
+		}
+	</style>
+</head>
+<body>
+	<h1>у тебя 9 секунд, чтобы собрать все шарики</h1>
+<div><h1>очки <span class="score">0</span></h1></div>
+<div class="box" style="left: 100px; top: 300px;"></div>
+<div class="box" style="left: 300px; top: 50px;"></div>
+<div class="box" style="left: 500px; top: 400px;"></div>
+<div class="box" style="left: 700px; top: 200px;"></div>
+
+
+<div class="box2" style="left: 300px; top: 300px"></div>
+<div class="box2" style="left: 150px; top: 400px"></div>
+<div class="box2" style="left: 200px; top: 500px"></div>
+<div class="box2" style="left: 300px; top: 20px"></div>
+
+
+
+<script type="text/javascript">
+	let score = 0;
+	let scoreBlock = document.querySelector('.score');
+
+
+
+	let box1 = document.querySelectorAll('.box');
+	let top1 = 100;
+	let height1 = 100;
+	let width1 = 100;
+
+
+	let box2 = document.querySelectorAll('.box2');
+	let top2 = 300;
+	let left2 = 200;
+
+
+
+	let moveDown = function(){
+		for(let i = 0; i<4; i++){
+			top1 = top1 + 10;
+			height1 = height1 - 1;
+			width1 = width1 - 1;
+			box1[i].style.top = top1 + 10*i + 'px';
+			box1[i].style.height = height1 + 'px'; 
+			box1[i].style.width = width1 + 'px';
+			
+		}
+
+	}
+
+	for(let j = 0; j<4; j++){
+		box1[j].onclick = function(){
+			score = score + 1;
+			scoreBlock.innerHTML = score;
+			box1[j].style.display = 'none';
+			if(score==8){
+					alert("winner!ураурапобеда");
+				}
+			}
+
+		}
+
+
+	setInterval(moveDown, 1000);
+
+	let moveLeft = function(){
+			for(let k = 0; k<4; k++){
+				left2 = left2 + 10;
+				height1 = height1 - 1;
+				width1 = width1 - 1;
+				box2[k].style.left = left2 + 20*k + 'px';
+				box2[k].style.height = height1 + 'px'; 
+				box2[k].style.width = width1 + 'px';
+				
+			}
+
+		}
+
+
+	for(let l = 0; l<4; l++){
+			box2[l].onclick = function(){
+				score = score + 1;
+				scoreBlock.innerHTML = score;
+				box2[l].style.display = 'none';
+				if(score==8){
+					alert("winner!ураурапобеда");
+				}
+			}
+		}
+
+	setInterval(moveLeft, 1000);
+
+	let disapear = function(){
+		if(score<8){
+			alert("looser ты проиграл");
+		}
+		for(let y = 0 ; y<8; y++){
+			box1[y].style.display = 'none';
+			box2[y].style.display = 'none';
+
+		}
+		
+		
+	}
+
+	setTimeout(disapear, 9000);
+
+
+</script>
+</body>
+</html>
